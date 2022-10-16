@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container">
+
+    <view class="full_view_button">
+        <navigator url="../findDevice/findDevice" open-type="navigate" class="uploader-text">
+            <text>Find Device</text>
+        </navigator>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+        <button type="primary" form-type="submit" loading="{{loading}}">Send</button>
+        <button type="primary" bindtap="showModal" res="data">Show Modal </button>
+        <button type="primary" bindtap="bindScan"> Scan QR </button>
+        
+        <input style="input" placeholder="Input data" bindinput="inputEvent" style="margin-top:10px; border: 1px solid gray; border-radius:5px"/>
+        <button type="primary" bindtap="saveToCache">Save to Cache</button>
+
+    </form>
+
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 95%; height: 300px; border: 1px solid gray"></map>
+
+
+
+    <view style="height:30px"></view>
+</view>

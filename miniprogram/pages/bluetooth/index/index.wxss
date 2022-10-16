@@ -1,0 +1,39 @@
+/**index.wxss**/
+  
+  .full_view_button {
+    margin-top: 15rpx;
+    width: 100%;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: none;
+    border-right: none;
+    display: flex;
+    transition: all 300ms ease;
+    height: auto;
+    padding: 0 0 0 40rpx;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  
+  .uploader-text {
+    width: 100%;
+    line-height: 52px;
+    font-size: 34rpx;
+    color: #007aff;
+  }
+form {
+    width: 100%;
+}
+form button {
+  margin-top: 15px;
+}
+
+form input {
+  margin: 0px 5px;
+  padding: 2px 5px;
+}
+
+map {
+  margin-top: 15px;
+}

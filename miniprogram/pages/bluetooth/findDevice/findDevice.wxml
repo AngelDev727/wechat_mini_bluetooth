@@ -1,0 +1,56 @@
+<wxs module="utils">
+    module.exports.max = function(n1, n2) {
+        return Math.max(n1, n2)
+    }
+    module.exports.len = function(arr) {
+        arr = arr || []
+        return arr.length
+    }
+</wxs>
+
+<view class="action_but">
+    <button class="center_start" size="mini" bindtap="openBluetoothAdapter">Start Scan</button>
+    <button class="center_item" size="mini" bindtap="stopBluetoothDevicesDiscovery">Stop Scan</button>
+    <button class="center_end" size="mini" bindtap="closeBluetoothAdapter">End</button>
+</view>
+
+<!-- <view class="page-section tc">
+  <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" binderror="videoErrorCallback" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
+</view> -->
+
+<view class="devices_summary">Found {{devices.length}} peripherals：</view>
+<!-- <view class="devices_summary">Found peripherals 已发现 {{devices.length}} 个外围设备：</view> -->
+<scroll-view class="device_list" scroll-y scroll-with-animation>
+  <view wx:for="{{devices}}" wx:key="index"
+   data-device-id="{{item.deviceId}}"
+   data-name="{{item.name || item.localName}}"
+   bindtap="createBLEConnection" 
+   class="device_item"
+   hover-class="device_item_hover">
+    <view style="font-size: 16px; color: #333;">{{item.name}}</view>
+    <view style="font-size: 10px">Signal strength: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
+    <!-- <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view> -->
+    <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
+    <view style="font-size: 10px">Services Number: {{utils.len(item.advertisServiceUUIDs)}}</view>
+    <!-- <view style="font-size: 10px">Service数量: {{utils.len(item.advertisServiceUUIDs)}}</view> -->
+  </view>
+</scroll-view>
+
+<view class="connected_info" wx:if="{{connected}}">
+  <view>
+    <!-- <text>已连接到 {{name}}</text> -->
+    <text>Connected to {{name}}</text>
+    <view class="operation">
+    <!-- <button wx:if="{{canWrite}}" size="mini" bindtap="writeBLECharacteristicValue">写数据</button> -->
+    <!-- <button size="mini" bindtap="closeBLEConnection">断开连接</button> -->
+    <button wx:if="{{canWrite}}" size="mini" bindtap="writeBLECharacteristicValue">Write data</button>
+    <button size="mini" bindtap="closeBLEConnection">Disconnect</button>
+    </view>
+  </view>
+  <view wx:for="{{chs}}" wx:key="index" style="font-size: 12px; margin-top: 10px;">
+    <!-- <view>特性UUID: {{item.uuid}}</view> -->
+    <!-- <view>特性值: {{item.value}}</view> -->
+    <view>Characteristic UUID: {{item.uuid}}</view>
+    <view>Characteristic value: {{item.value}}</view>
+  </view>
+</view>
